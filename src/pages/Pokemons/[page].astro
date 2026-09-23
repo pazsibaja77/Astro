@@ -16,6 +16,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 // 1. Recibir la propiedad 'page' que Astro inyecta automáticamente con la paginación
 const { page } = Astro.props;
 const title = 'Pokémon Static | Home';
+console.log(' ~ page', page); ' ~ page:' | { data: Array(20), page: 1, prev: null, next: '/pokemons/2' }
 ---
 
 <MainLayout title={title}>
@@ -36,11 +37,36 @@ const title = 'Pokémon Static | Home';
   <hr />
 
 <section class="flex mt-10 gap-2 items-center">
+
+  <!--  {
+  page.url.prev && (
+    <a class="btn" href={page.prev}>Anteriores</a>
+} -->
+
+
+<a class:list={[
+  `btn`,
+  {
+    disabled: !page.prev,
+  },
+]}
+  href={page.prev}>Anteriores</a>
+
+  <a class:list={[
+  `btn`,
+  {
+    disabled: !page.url.next,
+  },
+]}
+  href={page.url.next}>Siguientes</a>
+
+
+
 <a class="btn" href={page.prev}>Anteriores</a>
 <a class="btn" href={page.next}>Siguientes</a>
 
 <div class="flex flex-1">
-  <span>Pagina 1</span>
+  <span class="text-xl font-bold">Pagina 1 {page.current_page}</span>
 
   <a
     href="">Anteriores</a>
